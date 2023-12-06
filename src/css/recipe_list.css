@@ -1,0 +1,17 @@
+.recipe-list{
+    border: 1px solid black;
+    min-height: 100vh;
+    width: 50%;
+    padding: 25px;
+}
+.add_recipe_list-btn_container{
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.btn-primary{
+
+}
+.btn{
+
+}

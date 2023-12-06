@@ -1,0 +1,16 @@
+@import-normalize;
+@import 'recipe_list.css';
+@import 'buttons.css';
+
+*, *::before, *::after{
+    font-family: sans-serif;
+}
+
+html{
+    font-size: 25px;
+}
+
+body{
+    padding: 0px;
+    margin: 0px;
+}
