@@ -1,6 +1,8 @@
 @import-normalize;
 @import 'recipe_list.css';
 @import 'buttons.css';
+@import 'recipe.css';
+@import 'ingredient-list.css';
 
 *, *::before, *::after{
     font-family: sans-serif;
@@ -13,4 +15,8 @@ html{
 body{
     padding: 0px;
     margin: 0px;
+}
+
+.mr-1{
+    margin-right: 5px;
 }

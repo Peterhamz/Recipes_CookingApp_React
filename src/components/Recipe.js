@@ -1,45 +1,47 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import IngredientList from './IngredientList'
+import { RecipeContext } from './App'
 
 export default function Recipe(props) {
+const {handleRecipeDelete} = useContext(RecipeContext)
     const {
+        id,
         name, 
         cookTime,
         servings, 
         instructions,
-        ingredients
+        ingredients,
     } = props
 
   return (
-    <div>
-        <div>
-            <h3>{name}</h3>
+    <div className='recipe'>
+        <div className='recipe_header'>
+            <h3 className='recipe_title'>{name}</h3>
             <div>
-                <button className='btn'>Edit</button>
-                <button className='btn'>Delete</button>
+                <button className='btn btn-primary mr-1'>Edit</button>
+                <button className='btn btn-danger' onClick={() => handleRecipeDelete(id)}>Delete</button>
             </div>   
         </div>
-        <div>
-            <span>Cook Time:</span>
-            <span>{cookTime}</span>
+        <div className='recipe-row'>
+            <span className='recipe-label'>Cook Time:</span>
+            <span className='recipe-value'>{cookTime}</span>
         </div>
-        <div>
-            <span>Servings:</span>
-            <span>{servings}</span>
+        <div className='recipe-row'>
+            <span className='recipe-label'>Servings:</span>
+            <span className='recipe-value'>{servings}</span>
         </div>
-        <div>
-            <span>Instructions:</span>
-            <div>
+        <div className='recipe-row'>
+            <span className='recipe-label'>Instructions:</span>
+            <div className="recipe-value recipe_indented recipe_instruction">
                {instructions}
             </div>
         </div>
-        <div>
-            <span>Ingredients:</span>
-            <div>
+        <div className='recipe-row'>
+            <span className='recipe-label'>Ingredients:</span>
+            <div className="recipe-value recipe_indented">
                 <IngredientList ingredients = {ingredients}/>
             </div>
         </div>
-
     </div>
   )
 }

@@ -8,7 +8,7 @@ export default function IngredientList({ingredients}) {
     })
 
   return (
-    <div>
+    <div className="ingredient_grid">
       {ingredientElement}   
     </div>
   )
