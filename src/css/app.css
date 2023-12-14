@@ -3,13 +3,15 @@
 @import 'buttons.css';
 @import 'recipe.css';
 @import 'ingredient-list.css';
+@import 'recipe-edit.css';
 
 *, *::before, *::after{
     font-family: sans-serif;
+    box-sizing: border-box;
 }
 
 html{
-    font-size: 25px;
+    font-size: 20px;
 }
 
 body{
