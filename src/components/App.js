@@ -14,7 +14,7 @@ function generateRandomString(length) {
 
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
-    result += characters.charAt(randomIndex);
+     result += characters.charAt(randomIndex);
   }
 
   return result;
@@ -23,11 +23,12 @@ function generateRandomString(length) {
 
 export default function App() {
 
+  const [selectedId, setSelectedId] = useState()
   const [recipe, setRecipe] = useState(RecipeArray)
 
-  useEffect(() =>{
-    //console.log("Using Use Effect")
-  })
+  const selectedIBool = recipe.find(recip => recip.id === selectedId)
+  
+
 
   useEffect(() =>{
     console.log("First Effect")
@@ -36,15 +37,23 @@ export default function App() {
    },[])
    
    useEffect(() =>{
-      console.log("second Effect")
+    //  console.log("second Effect")
      const theItem = localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(recipe))
      console.log(theItem)
    },[recipe])
   
-
+  
   const recipeContextValue = {
     handleRecipeAdd,
-    handleRecipeDelete
+    handleRecipeDelete,
+    handleRecipeSelect,
+    handleNewRecipeArray,
+    generateRandomString
+  }
+
+
+  function handleRecipeSelect(id){
+    setSelectedId(id)
   }
 
 
@@ -52,33 +61,44 @@ export default function App() {
   function handleRecipeAdd(){
       const newRecipe = {
         id:generateRandomString(10),
-        name:"Plain Chicken",
-        cookTime:"1:45",
-        servings:3,
-        instructions:"inst.",
+        name:"",
+        cookTime:"",
+        servings:1,
+        instructions:"",
         ingredients:[
           {
              id:generateRandomString(8),
-             name:"Name",
-             amount:'2 pounds'
+             name:"",
+             amount:''
           }
         ]
       }
+      setSelectedId(newRecipe.id)
       setRecipe([...recipe, newRecipe])
   }
 
+  function handleNewRecipeArray(id, reci){
+    const newRecipe = [...recipe]
+    const index = newRecipe.findIndex(r => r.id === id)
+    newRecipe[index] = reci
+    setRecipe(newRecipe)
+  }
+
   function handleRecipeDelete(id){
+    if(selectedId !== null && selectedId === id){
+      setSelectedId(undefined)
+    }
     setRecipe(recipe.filter(recip => recip.id !==id))
   }
 
   return (
     <RecipeContext.Provider value={recipeContextValue}>
        <RecipeList  recipies = {recipe}/>
-       <RecipeEdit />
+      {selectedIBool && <RecipeEdit recipee = {selectedIBool} />}
       </RecipeContext.Provider>
   )
 }
-const RecipeArray = 
+const RecipeArray =
 [
     {
         id:generateRandomString(10),
@@ -98,5 +118,5 @@ const RecipeArray =
             amount:'1 pound'
          }
         ]
-    }, 
+    },
 ]
